@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../static/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body class="w3-light-grey">
+
+<header class="noselect">
+	<div class="dropdown-content">
+		<body link="red" vlink="#cecece" alink="#ff0000" bgcolor="black">
+			<a href="/logout" style="font-size:25px"> &#8617 </a>
+		</body>
+	</div>
+
+	<div class="cover-img">
+		<div class="cover-inner">
+			<h3 id="dayName"> Добро пожаловать, <a th:text="${activeUser.username}"></a>
+			</h3>
+		</div>
+	</div>
+
+
+</header>
+
+<div class="List">
+	<div class="content">
+		<div class="layer1">
+			<div class="left">
+				<div class="todoList-menu">
+					<h3>Список задач</h3><br>
+					<div th:each="todoList : ${activeUser.todoLists}" class="todoList-button">
+						<div style="float: right;">
+							<form  th:action="@{/main/remove/todoList/{id}(id = ${todoList.id})}" method="post">
+								<button> <i class="far fa-trash-alt delete" style="color: gray ;"></i></button>
+							</form>
+						</div>
+
+						<form th:action="@{/main/view/todoList/{id}(id = ${todoList.id})}" method="post">
+							<button  th:text="${todoList.name}" type="submit" style="color: gray ;"> </button>
+						</form>
+					</div>
+
+					<form th:action="@{/main/add/todoList}" method="post">
+
+						<input type="text" name="name" placeholder="Добавить список..." th:value="${todoListForm.name}">
+						<button> <i class="fas fa-plus add plus-icon"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="layer2">
+			<div class="right">
+				<div th:if="${todoListToView != null}" class="tasks-in-todoList">
+					<h3 th:text="${todoListToView.name}"></h3><br>
+					<div th:each="task : ${todoListToView.tasks}">
+
+						<h2 th:text="${task.name}"></h2>
+
+						<form th:action="@{/main/remove/task/{id}(id =${task.id})}" method="post">
+							<button> <i class="far fa-trash-alt delete" style="color: gray ;"></i></button>
+						</form>
+
+					</div>
+					<form class="task-name" th:action="@{/main/todoList/{id}/add/task(id = ${todoListToView.id})}" method="post">
+						<input type="text" name="name" placeholder="Добавить задачу..." th:value="${taskForm.name}">
+						<button> <i class="fas fa-plus add plus-icon"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

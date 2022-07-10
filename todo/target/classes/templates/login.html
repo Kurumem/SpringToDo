@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="../static/login.css">
+
+
+
+</head>
+<body>
+    <h1>Список задач</h1>
+    <h1>Авторизация</h1>
+    <div id="wrapper">
+        <form id="signin" method="post" th:action="@{/login}" autocomplete="off">
+            <div class="content">
+                <div class="input-field">
+                    <input type="text" id="user" name="username" placeholder="Логин" th:value="${username}"/>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="pass" name="password" placeholder="Пароль" th:value="${password}"/>
+                </div>
+                <p class="login-error" th:text="${loginError}"></p>
+                <div class="action">
+                    <p>Не зарегестрированы? <a th:href="@{/registration}">Регестрируйтесь!</a></p>
+                    <button type="submit">&#xf0da;</button>
+                </div>
+
+
+
+        </form>
+    </div>
+</body>
+</html>
