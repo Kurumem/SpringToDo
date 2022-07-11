@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../static/registration.css">
+</head>
+<body>
+    <h1>Список задач</h1>
+    <h1>Регистрация</h1>
+    <div id="wrapper">
+        <form id="signin" method="post" th:action="@{/registration}" autocomplete="off">
+            <div class="content">
+                <div class="input-field">
+                    <input type="text" id="name" name="name" placeholder="Имя" th:value="${name}"/>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="user" name="username" placeholder="Логин" th:value="${username}"/>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="pass" name="password" placeholder="Пароль" th:value="${password}"/>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="confirmPassword" placeholder="Подтвердите пароль" th:value="${password}">
+                </div>
+                <div class="username-error" th:text="${usernameError}"></div>
+                <div class="confirm-password-error" th:text="${confirmPasswordError}"></div>
+                <div class="action">
+                    <p>Зарегестрированы? <a th:href="@{/login}">Заходите!</a></p>
+                    <button type="submit">&#xf0da;</button>
+                </div>
+
+
+
+
+</body>
+</html>
